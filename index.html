@@ -1,231 +1,714 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="author" content="Adenike Omoregbee"/>
-  <meta name="description" content="Picks & Shovels™ Lite — GitHub Pages app (no API). Proprietary framework by Adenike Omoregbee. Attribution required."/>
-  <title>Picks & Shovels™ Lite</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infrastructure Opportunity Mapper - Market Intelligence Platform</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #64748b;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --bg: #f8fafc;
+            --surface: #ffffff;
+            --text: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+        }
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <style>
-    :root{
-      --ink:#0f172a;
-      --muted:#475569;
-      --line:#e2e8f0;
-      --bg:#fbfaf8;
-      --paper:#ffffff;
-      --warm:#8B6F47;
-      --dark:#2f2a25;
-      --sage:#8A9A7B;
-      --demo:#D64545;
-      --radius:14px;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:'Work Sans',sans-serif;
-      background:linear-gradient(135deg,var(--bg),#fff);
-      color:var(--ink);
-      line-height:1.7;
-    }
-    .container{max-width:1100px;margin:auto;padding:24px}
-    header{
-      text-align:center;
-      padding:24px;
-      border-bottom:2px solid var(--warm);
-      margin-bottom:20px;
-    }
-    h1{
-      font-family:'Crimson Pro',serif;
-      font-size:3rem;
-      color:var(--dark);
-      margin:0;
-    }
-    .tagline{color:var(--muted)}
-    .banner{
-      display:flex;justify-content:space-between;align-items:center;
-      background:linear-gradient(135deg,var(--dark),var(--warm));
-      color:#fff;padding:14px 18px;border-radius:var(--radius);
-      margin-bottom:20px;flex-wrap:wrap;gap:10px;
-    }
-    .badge{
-      background:var(--demo);
-      padding:6px 12px;border-radius:999px;
-      font-weight:700;font-size:12px;
-    }
-    textarea,select{
-      width:100%;padding:12px;border-radius:12px;
-      border:2px solid var(--line);
-      font-family:inherit;font-size:1rem;
-    }
-    textarea{min-height:120px}
-    .card{
-      background:#fff;border:1px solid var(--line);
-      border-radius:var(--radius);
-      padding:18px;margin-bottom:16px;
-    }
-    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-    button{
-      padding:12px 16px;border-radius:12px;
-      border:2px solid var(--line);
-      background:#fff;font-weight:700;
-      cursor:pointer;
-    }
-    button.primary{
-      background:linear-gradient(135deg,var(--warm),var(--dark));
-      color:#fff;border:none;
-    }
-    .output{
-      white-space:pre-wrap;
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      padding:18px;
-      background:#fff;
-      position:relative;
-    }
-    .watermark{
-      position:absolute;inset:0;
-      display:flex;align-items:center;justify-content:center;
-      font-size:48px;font-weight:800;
-      color:rgba(214,69,69,.1);
-      transform:rotate(-20deg);
-      pointer-events:none;
-    }
-    footer{
-      margin-top:30px;
-      padding-top:20px;
-      border-top:1px solid var(--line);
-      font-size:.9rem;color:var(--muted);
-    }
-  </style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            background: var(--surface);
+            border-bottom: 2px solid var(--border);
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .tagline {
+            color: var(--text-muted);
+            font-size: 1.125rem;
+        }
+
+        .license-section {
+            background: var(--surface);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            margin-bottom: 2rem;
+        }
+
+        .license-input-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        button {
+            padding: 0.75rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        button:disabled {
+            background: var(--secondary);
+            cursor: not-allowed;
+        }
+
+        .mode-indicator {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            margin-left: 1rem;
+        }
+
+        .mode-demo {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .mode-licensed {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .input-section {
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            margin-bottom: 2rem;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 1rem;
+            font-family: inherit;
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .analyze-btn {
+            width: 100%;
+            margin-top: 1rem;
+            padding: 1rem;
+            font-size: 1.125rem;
+        }
+
+        .results {
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            display: none;
+        }
+
+        .results.visible {
+            display: block;
+        }
+
+        .section {
+            margin-bottom: 2.5rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-number {
+            width: 36px;
+            height: 36px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.125rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .locked-section {
+            opacity: 0.6;
+            position: relative;
+        }
+
+        .lock-overlay {
+            background: rgba(248, 250, 252, 0.95);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 2px dashed var(--warning);
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .lock-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .upgrade-message {
+            font-size: 1.125rem;
+            color: var(--text);
+            margin-bottom: 1rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin: 1rem 0;
+            text-align: left;
+            display: inline-block;
+        }
+
+        .feature-list li {
+            padding: 0.5rem 0;
+            color: var(--text-muted);
+        }
+
+        .feature-list li::before {
+            content: "🔒 ";
+            margin-right: 0.5rem;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 3rem;
+        }
+
+        .spinner {
+            border: 4px solid var(--border);
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .watermark {
+            background: #fef3c7;
+            border-left: 4px solid var(--warning);
+            padding: 1rem;
+            margin: 1rem 0;
+            font-size: 0.875rem;
+            color: #92400e;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border: 1px solid var(--border);
+        }
+
+        th {
+            background: var(--bg);
+            font-weight: 600;
+        }
+
+        footer {
+            margin-top: 4rem;
+            padding: 2rem 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .demo-badge {
+            background: var(--warning);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
+        .alert {
+            padding: 1rem;
+            border-radius: 4px;
+            margin: 1rem 0;
+        }
+
+        .alert-info {
+            background: #dbeafe;
+            color: #1e40af;
+            border-left: 4px solid var(--primary);
+        }
+
+        .alert-success {
+            background: #d1fae5;
+            color: #065f46;
+            border-left: 4px solid var(--success);
+        }
+
+        .alert-warning {
+            background: #fef3c7;
+            color: #92400e;
+            border-left: 4px solid var(--warning);
+        }
+
+        .alert-danger {
+            background: #fee2e2;
+            color: #991b1b;
+            border-left: 4px solid var(--danger);
+        }
+    </style>
 </head>
-
 <body>
-<div class="container">
+    <header>
+        <div class="container">
+            <h1>Infrastructure Opportunity Mapper</h1>
+            <p class="tagline">AI-Powered Market Intelligence for Infrastructure Plays</p>
+        </div>
+    </header>
 
-  <div class="banner">
-    <div><strong>Demo Mode</strong> <span class="badge">DEMO</span></div>
-    <div style="font-size:12px">Offline GitHub Pages version — no API required</div>
-  </div>
+    <div class="container">
+        <!-- License Section -->
+        <div class="license-section">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <strong>Current Mode:</strong>
+                    <span id="modeIndicator" class="mode-indicator mode-demo">DEMO MODE</span>
+                </div>
+                <div>
+                    <span id="analysisCount" style="color: var(--text-muted); font-size: 0.875rem;"></span>
+                </div>
+            </div>
+            
+            <div class="license-input-group">
+                <input 
+                    type="text" 
+                    id="licenseKey" 
+                    placeholder="Enter license key to unlock advanced analysis..."
+                    style="font-family: monospace;"
+                >
+                <button onclick="validateLicense()">Activate License</button>
+            </div>
 
-  <header>
-    <h1>Picks & Shovels™ Lite</h1>
-    <p class="tagline">Infrastructure plays behind any trend</p>
-    <p style="font-size:.85rem">© 2026 Adenike Omoregbee — Attribution required</p>
-  </header>
+            <div id="licenseMessage"></div>
 
-  <div class="card">
-    <label><strong>Trend / Prompt</strong></label>
-    <textarea id="trend" placeholder="e.g. AI agents, foster care, creator economy…"></textarea>
+            <div class="alert alert-info" style="margin-top: 1rem;">
+                <strong>Demo Mode:</strong> Basic opportunity mapping • Generic competitive overview • Limited analyses (3 free)
+            </div>
+        </div>
 
-    <label style="margin-top:10px"><strong>Context (optional)</strong></label>
-    <textarea id="context" placeholder="UK focus, solo founder, capital constrained…"></textarea>
+        <!-- Input Section -->
+        <div class="input-section">
+            <h2 style="margin-bottom: 1rem;">Analyze a Market Opportunity</h2>
+            <textarea 
+                id="topicInput" 
+                placeholder="Enter a trend, technology, or industry to analyze (e.g., 'AI agents', 'Remote work', 'Electric vehicles')..."
+            ></textarea>
+            <button class="analyze-btn" onclick="analyzeOpportunity()">
+                🔍 Generate Infrastructure Analysis
+            </button>
+        </div>
 
-    <div class="actions">
-      <button class="primary" onclick="generate()">Generate</button>
-      <button onclick="copyOut()">Copy</button>
-      <button onclick="downloadOut()">Download</button>
+        <!-- Results Section -->
+        <div id="results" class="results">
+            <!-- Results will be inserted here -->
+        </div>
     </div>
-  </div>
 
-  <div class="card">
-    <h2>Output</h2>
-    <div class="output" id="output">—</div>
-  </div>
+    <footer>
+        <p><strong>Infrastructure Opportunity Mapper</strong></p>
+        <p>© 2026 All Rights Reserved | Proprietary market intelligence methodology</p>
+    </footer>
 
-  <footer>
-    <strong>Framework:</strong> Picks & Shovels™ by Adenike Omoregbee<br>
-    <strong>Methodology:</strong> Infrastructure opportunity mapping with competitive intelligence and execution reality checks<br><br>
-    PICKS & SHOVELS LITE ™ © 2025 All Rights Reserved
-  </footer>
+    <script>
+        // ============================================
+        // CONFIGURATION
+        // ============================================
+        
+        // IMPORTANT: Set this to your API endpoint URL
+        // This endpoint should validate licenses and return protected content
+        // See setup instructions in accompanying documentation
+        const API_ENDPOINT = 'YOUR_API_ENDPOINT_HERE'; // e.g., 'https://your-worker.username.workers.dev'
+        
+        // App state
+        let appState = {
+            mode: 'demo',
+            licenseKey: null,
+            analysisCount: 0,
+            maxDemoAnalyses: 3
+        };
 
-</div>
+        // ============================================
+        // STATE MANAGEMENT
+        // ============================================
+        
+        function loadState() {
+            const saved = localStorage.getItem('infraOpportunityMapperState');
+            if (saved) {
+                appState = { ...appState, ...JSON.parse(saved) };
+                if (appState.licenseKey) {
+                    validateLicense(appState.licenseKey, true);
+                }
+            }
+            updateAnalysisCount();
+        }
 
-<script>
-function generate(){
-  const trend=document.getElementById("trend").value.trim();
-  if(!trend){alert("Add a trend first");return;}
+        function saveState() {
+            localStorage.setItem('infraOpportunityMapperState', JSON.stringify(appState));
+        }
 
-  const text=
-`1️⃣ OVERVIEW
-Trend: ${trend}
-Why it matters: Infrastructure absorbs risk and gets paid regardless of winners.
-Bottlenecks: compliance, coordination, data quality, procurement.
-Why P&S: picks-and-shovels capture value across cycles.
+        function updateAnalysisCount() {
+            const countEl = document.getElementById('analysisCount');
+            if (appState.mode === 'demo') {
+                const remaining = appState.maxDemoAnalyses - appState.analysisCount;
+                countEl.textContent = `Demo analyses remaining: ${remaining}`;
+                if (remaining <= 0) {
+                    countEl.innerHTML = `<span style="color: var(--danger);">Demo limit reached. <a href="#" onclick="showPricing(); return false;">Upgrade to continue</a></span>`;
+                }
+            } else {
+                countEl.textContent = `Licensed Mode • Unlimited analyses`;
+            }
+        }
 
-2️⃣ VALUE CHAIN
-Hardware | Digital | Data | Governance | Services | Tooling | Adjacent
+        // ============================================
+        // LICENSE VALIDATION
+        // ============================================
+        
+        async function validateLicense(key, silent = false) {
+            const input = key || document.getElementById('licenseKey').value.trim();
+            
+            if (!input) {
+                if (!silent) {
+                    showLicenseMessage('Please enter a license key', 'warning');
+                }
+                return;
+            }
 
-3️⃣ TABLE
-Category | Enables | Buyer | Difficulty | Capital | Reg Risk | Horizon
-Compliance | Workflow | Operators | H | ££ | H | M
-Data | Decisions | Teams | M | ££ | M | M
+            // Show loading state
+            if (!silent) {
+                showLicenseMessage('Validating license...', 'info');
+            }
 
-4️⃣ PATHS
-COPY-FIRST:
-1. Find competitors
-2. Archive history
-3. Traffic correlation
-4. Copy pricing/features
-5. Resist “improve”
-6. Assume smarter
+            try {
+                // Call API endpoint to validate license
+                // NOTE: This prevents client-side validation bypass
+                const response = await fetch(`${API_ENDPOINT}/validate-license`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ licenseKey: input })
+                });
 
-5️⃣ COMPETITIVE
-Mirages:
-• Corpses with no winner
-• “Everyone needs it” but none pay
-• Hostile churn
+                if (!response.ok) {
+                    throw new Error('Validation failed');
+                }
 
-6️⃣ TIERS
-Tier 1: £0–500 validation
-Phase 0: Paid discovery
-Go/No-Go: 0 stop | 3+ strong
+                const result = await response.json();
 
-7️⃣ RISKS
-Adoption, regulation, commoditisation, timing, concentration
+                if (result.valid) {
+                    appState.mode = 'licensed';
+                    appState.licenseKey = input;
+                    saveState();
+                    
+                    const indicator = document.getElementById('modeIndicator');
+                    indicator.textContent = 'LICENSED MODE';
+                    indicator.className = 'mode-indicator mode-licensed';
+                    
+                    updateAnalysisCount();
+                    
+                    if (!silent) {
+                        showLicenseMessage('✅ License activated! Advanced analysis unlocked.', 'success');
+                    }
+                } else {
+                    if (!silent) {
+                        showLicenseMessage('Invalid license key. Please check and try again.', 'warning');
+                    }
+                }
+            } catch (error) {
+                console.error('License validation error:', error);
+                if (!silent) {
+                    showLicenseMessage('Unable to validate license. Please check your connection and try again.', 'danger');
+                }
+            }
+        }
 
-8️⃣ EXECUTION
-Copy–innovation paradox
-Cost: £0–300 | Time: 2–4 weeks | Solo: Yes
+        function showLicenseMessage(message, type) {
+            const messageEl = document.getElementById('licenseMessage');
+            messageEl.innerHTML = `<div class="alert alert-${type}" style="margin-top: 1rem;">${message}</div>`;
+            setTimeout(() => {
+                if (!message.includes('✅')) { // Don't clear success messages automatically
+                    messageEl.innerHTML = '';
+                }
+            }, 5000);
+        }
 
-9️⃣ FOUNDER FIT
-This suits maintainers who tolerate boring delivery.
+        function showPricing() {
+            alert('Pricing Plans:\n\n' +
+                  'STANDARD - $99/month\n' +
+                  '• Complete 10-section analysis\n' +
+                  '• 50 analyses per month\n' +
+                  '• Advanced competitive intelligence\n' +
+                  '• Strategic validation frameworks\n\n' +
+                  'PROFESSIONAL - $299/month\n' +
+                  '• Everything in Standard\n' +
+                  '• 200 analyses per month\n' +
+                  '• API access for automation\n' +
+                  '• Priority support\n\n' +
+                  'Contact: hello@yourdomain.com');
+        }
 
-🔟 RESEARCH
-✓ Who pays?
-✓ Where is the bottleneck?
-✓ What breaks first?
+        // ============================================
+        // ANALYSIS ENGINE
+        // ============================================
+        
+        async function analyzeOpportunity() {
+            const topic = document.getElementById('topicInput').value.trim();
+            
+            if (!topic) {
+                alert('Please enter a trend or industry to analyze');
+                return;
+            }
 
-—
-Framework: Picks & Shovels™ by Adenike Omoregbee`;
+            // Check demo limit
+            if (appState.mode === 'demo' && appState.analysisCount >= appState.maxDemoAnalyses) {
+                alert('Demo limit reached. Please enter a license key to continue.');
+                showPricing();
+                return;
+            }
 
-  const out=document.getElementById("output");
-  out.textContent=text;
-  const wm=document.createElement("div");
-  wm.className="watermark";
-  wm.textContent="DEMO";
-  out.appendChild(wm);
-}
+            // Increment analysis count
+            appState.analysisCount++;
+            saveState();
+            updateAnalysisCount();
 
-function copyOut(){
-  navigator.clipboard.writeText(document.getElementById("output").innerText);
-  alert("Copied");
-}
+            // Show loading state
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.className = 'results visible';
+            resultsDiv.innerHTML = `
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Analyzing infrastructure opportunities for: <strong>${topic}</strong></p>
+                    <p style="color: var(--text-muted); font-size: 0.875rem; margin-top: 0.5rem;">
+                        Mapping value chains, identifying bottlenecks, analyzing competitive landscape...
+                    </p>
+                </div>
+            `;
 
-function downloadOut(){
-  const text=document.getElementById("output").innerText;
-  const blob=new Blob([text],{type:"text/plain"});
-  const a=document.createElement("a");
-  a.href=URL.createObjectURL(blob);
-  a.download="picks-and-shovels-output.txt";
-  a.click();
-}
-</script>
+            try {
+                // Call API endpoint to generate analysis
+                // CRITICAL: All proprietary logic stays on server
+                const response = await fetch(`${API_ENDPOINT}/analyze`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        topic: topic,
+                        mode: appState.mode,
+                        licenseKey: appState.licenseKey
+                    })
+                });
 
+                if (!response.ok) {
+                    throw new Error('Analysis failed');
+                }
+
+                const analysis = await response.json();
+                displayResults(analysis, topic);
+
+            } catch (error) {
+                console.error('Analysis error:', error);
+                resultsDiv.innerHTML = `
+                    <div class="alert alert-danger">
+                        <strong>Analysis Error</strong><br>
+                        Unable to generate analysis. Please check your connection and try again.
+                        <br><br>
+                        <small>If this problem persists, ensure the API endpoint is properly configured.</small>
+                    </div>
+                `;
+            }
+        }
+
+        function displayResults(analysis, topic) {
+            const resultsDiv = document.getElementById('results');
+            
+            let html = `
+                <div style="border-bottom: 2px solid var(--primary); padding-bottom: 1rem; margin-bottom: 2rem;">
+                    <h2 style="color: var(--primary); font-size: 2rem; margin-bottom: 0.5rem;">
+                        Infrastructure Opportunities: ${topic}
+                    </h2>
+                    <p style="color: var(--text-muted);">
+                        Generated on ${new Date().toLocaleDateString()} • 
+                        Mode: ${appState.mode === 'demo' ? 'Demo (Basic Analysis)' : 'Licensed (Advanced Intelligence)'}
+                    </p>
+                </div>
+            `;
+
+            // Add watermark if demo mode
+            if (appState.mode === 'demo') {
+                html += `
+                    <div class="watermark">
+                        <strong>⚠️ DEMO MODE:</strong> This analysis includes basic opportunity mapping only. 
+                        Advanced features (competitive intelligence, validation frameworks, execution playbooks, risk assessment) 
+                        require a license. <a href="#" onclick="showPricing(); return false;" style="color: #92400e; text-decoration: underline;">View pricing</a>
+                    </div>
+                `;
+            }
+
+            // Display all sections returned from API
+            if (analysis.sections) {
+                analysis.sections.forEach(section => {
+                    html += `
+                        <div class="section">
+                            <div class="section-header">
+                                <div class="section-number">${section.number}</div>
+                                <h3 class="section-title">${section.title}</h3>
+                                ${appState.mode === 'demo' ? '<span class="demo-badge">DEMO</span>' : ''}
+                            </div>
+                            <div class="section-content">
+                                ${section.content}
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+
+            // Display locked sections if demo mode
+            if (analysis.lockedSections && analysis.lockedSections.length > 0) {
+                analysis.lockedSections.forEach(section => {
+                    html += `
+                        <div class="section locked-section">
+                            <div class="section-header">
+                                <div class="section-number" style="opacity: 0.5;">${section.number}</div>
+                                <h3 class="section-title" style="opacity: 0.5;">${section.title}</h3>
+                            </div>
+                            <div class="lock-overlay">
+                                <div class="lock-icon">🔒</div>
+                                <p class="upgrade-message">
+                                    <strong>Licensed Feature</strong>
+                                </p>
+                                <p style="color: var(--text-muted); margin-bottom: 1rem;">
+                                    ${section.description}
+                                </p>
+                                <ul class="feature-list">
+                                    ${section.features.map(f => `<li>${f}</li>`).join('')}
+                                </ul>
+                                <button onclick="showPricing()" style="margin-top: 1rem;">
+                                    Unlock Advanced Analysis
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+
+            // Add footer
+            html += `
+                <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid var(--border);">
+                    <p style="color: var(--text-muted); line-height: 1.8; text-align: center;">
+                        <strong>Infrastructure Opportunity Mapper</strong><br>
+                        AI-powered market intelligence platform<br>
+                        ${appState.mode === 'demo' 
+                            ? 'Demo version shows basic capabilities • <a href="#" onclick="showPricing(); return false;">Upgrade for complete strategic intelligence</a>' 
+                            : 'Licensed version with proprietary analysis methodology'
+                        }
+                    </p>
+                </div>
+            `;
+
+            resultsDiv.innerHTML = html;
+        }
+
+        // ============================================
+        // INITIALIZATION
+        // ============================================
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            loadState();
+            
+            // Check if API endpoint is configured
+            if (API_ENDPOINT === 'YOUR_API_ENDPOINT_HERE') {
+                document.querySelector('.input-section').innerHTML += `
+                    <div class="alert alert-warning" style="margin-top: 1rem;">
+                        <strong>⚠️ Configuration Required:</strong> API endpoint not configured. 
+                        Please see setup documentation to connect the backend service.
+                    </div>
+                `;
+            }
+        });
+    </script>
 </body>
 </html>
-
