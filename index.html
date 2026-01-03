@@ -1,99 +1,231 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="author" content="Adenike Omoregbee"/>
+  <meta name="description" content="Picks & Shovels™ Lite — GitHub Pages app (no API). Proprietary framework by Adenike Omoregbee. Attribution required."/>
   <title>Picks & Shovels™ Lite</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
   <style>
-    body{font-family:system-ui;margin:24px;max-width:900px}
-    textarea{width:100%;min-height:90px}
-    pre{white-space:pre-wrap;background:#f6f6f6;padding:12px;border-radius:10px}
-    .row{display:flex;gap:10px;flex-wrap:wrap}
-    .pill{padding:6px 10px;border-radius:999px;background:#eee;font-size:12px}
+    :root{
+      --ink:#0f172a;
+      --muted:#475569;
+      --line:#e2e8f0;
+      --bg:#fbfaf8;
+      --paper:#ffffff;
+      --warm:#8B6F47;
+      --dark:#2f2a25;
+      --sage:#8A9A7B;
+      --demo:#D64545;
+      --radius:14px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:'Work Sans',sans-serif;
+      background:linear-gradient(135deg,var(--bg),#fff);
+      color:var(--ink);
+      line-height:1.7;
+    }
+    .container{max-width:1100px;margin:auto;padding:24px}
+    header{
+      text-align:center;
+      padding:24px;
+      border-bottom:2px solid var(--warm);
+      margin-bottom:20px;
+    }
+    h1{
+      font-family:'Crimson Pro',serif;
+      font-size:3rem;
+      color:var(--dark);
+      margin:0;
+    }
+    .tagline{color:var(--muted)}
+    .banner{
+      display:flex;justify-content:space-between;align-items:center;
+      background:linear-gradient(135deg,var(--dark),var(--warm));
+      color:#fff;padding:14px 18px;border-radius:var(--radius);
+      margin-bottom:20px;flex-wrap:wrap;gap:10px;
+    }
+    .badge{
+      background:var(--demo);
+      padding:6px 12px;border-radius:999px;
+      font-weight:700;font-size:12px;
+    }
+    textarea,select{
+      width:100%;padding:12px;border-radius:12px;
+      border:2px solid var(--line);
+      font-family:inherit;font-size:1rem;
+    }
+    textarea{min-height:120px}
+    .card{
+      background:#fff;border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:18px;margin-bottom:16px;
+    }
+    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    button{
+      padding:12px 16px;border-radius:12px;
+      border:2px solid var(--line);
+      background:#fff;font-weight:700;
+      cursor:pointer;
+    }
+    button.primary{
+      background:linear-gradient(135deg,var(--warm),var(--dark));
+      color:#fff;border:none;
+    }
+    .output{
+      white-space:pre-wrap;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:18px;
+      background:#fff;
+      position:relative;
+    }
+    .watermark{
+      position:absolute;inset:0;
+      display:flex;align-items:center;justify-content:center;
+      font-size:48px;font-weight:800;
+      color:rgba(214,69,69,.1);
+      transform:rotate(-20deg);
+      pointer-events:none;
+    }
+    footer{
+      margin-top:30px;
+      padding-top:20px;
+      border-top:1px solid var(--line);
+      font-size:.9rem;color:var(--muted);
+    }
   </style>
 </head>
+
 <body>
-  <h1>Picks & Shovels™</h1>
-  <div class="pill" id="modePill">DEMO MODE</div>
+<div class="container">
 
-  <h3>License Key</h3>
-  <input id="license" placeholder="Enter license key" style="width:320px" />
-  <button id="activate">Activate</button>
-  <p id="licenseMsg"></p>
-
-  <h3>Analyze a trend</h3>
-  <textarea id="trend" placeholder="e.g., AI agents, remote work enablement, GitHub apps..."></textarea>
-  <div class="row">
-    <button id="run">Generate</button>
-    <button id="copy">Copy</button>
-    <button id="download">Download</button>
+  <div class="banner">
+    <div><strong>Demo Mode</strong> <span class="badge">DEMO</span></div>
+    <div style="font-size:12px">Offline GitHub Pages version — no API required</div>
   </div>
 
-  <h3>Output</h3>
-  <pre id="out">—</pre>
+  <header>
+    <h1>Picks & Shovels™ Lite</h1>
+    <p class="tagline">Infrastructure plays behind any trend</p>
+    <p style="font-size:.85rem">© 2026 Adenike Omoregbee — Attribution required</p>
+  </header>
+
+  <div class="card">
+    <label><strong>Trend / Prompt</strong></label>
+    <textarea id="trend" placeholder="e.g. AI agents, foster care, creator economy…"></textarea>
+
+    <label style="margin-top:10px"><strong>Context (optional)</strong></label>
+    <textarea id="context" placeholder="UK focus, solo founder, capital constrained…"></textarea>
+
+    <div class="actions">
+      <button class="primary" onclick="generate()">Generate</button>
+      <button onclick="copyOut()">Copy</button>
+      <button onclick="downloadOut()">Download</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Output</h2>
+    <div class="output" id="output">—</div>
+  </div>
+
+  <footer>
+    <strong>Framework:</strong> Picks & Shovels™ by Adenike Omoregbee<br>
+    <strong>Methodology:</strong> Infrastructure opportunity mapping with competitive intelligence and execution reality checks<br><br>
+    PICKS & SHOVELS LITE ™ © 2025 All Rights Reserved
+  </footer>
+
+</div>
 
 <script>
-  const API_URL = "https://YOUR-PRIVATE-API.example.com/analyze"; // set to your backend
-  let tier = "demo";
+function generate(){
+  const trend=document.getElementById("trend").value.trim();
+  if(!trend){alert("Add a trend first");return;}
 
-  function setMode(t){
-    tier = t;
-    document.getElementById("modePill").textContent = (t === "full") ? "LICENSED" : "DEMO MODE";
-  }
+  const text=
+`1️⃣ OVERVIEW
+Trend: ${trend}
+Why it matters: Infrastructure absorbs risk and gets paid regardless of winners.
+Bottlenecks: compliance, coordination, data quality, procurement.
+Why P&S: picks-and-shovels capture value across cycles.
 
-  // super-light client check (real validation must be server-side)
-  document.getElementById("activate").onclick = () => {
-    const key = document.getElementById("license").value.trim();
-    if(!key || key.length < 8){
-      document.getElementById("licenseMsg").textContent = "Invalid license key format.";
-      setMode("demo");
-      return;
-    }
-    localStorage.setItem("ps_license", key);
-    document.getElementById("licenseMsg").textContent = "Key saved. Full access is confirmed server-side.";
-  };
+2️⃣ VALUE CHAIN
+Hardware | Digital | Data | Governance | Services | Tooling | Adjacent
 
-  document.getElementById("run").onclick = async () => {
-    const trend = document.getElementById("trend").value.trim();
-    const licenseKey = localStorage.getItem("ps_license") || "";
-    if(!trend) return;
+3️⃣ TABLE
+Category | Enables | Buyer | Difficulty | Capital | Reg Risk | Horizon
+Compliance | Workflow | Operators | H | ££ | H | M
+Data | Decisions | Teams | M | ££ | M | M
 
-    document.getElementById("out").textContent = "Running…";
+4️⃣ PATHS
+COPY-FIRST:
+1. Find competitors
+2. Archive history
+3. Traffic correlation
+4. Copy pricing/features
+5. Resist “improve”
+6. Assume smarter
 
-    const res = await fetch(API_URL, {
-      method:"POST",
-      headers:{ "Content-Type":"application/json" },
-      body: JSON.stringify({ trend, licenseKey, tierHint: tier })
-    });
+5️⃣ COMPETITIVE
+Mirages:
+• Corpses with no winner
+• “Everyone needs it” but none pay
+• Hostile churn
 
-    const data = await res.json();
-    setMode(data.tier === "full" ? "full" : "demo");
+6️⃣ TIERS
+Tier 1: £0–500 validation
+Phase 0: Paid discovery
+Go/No-Go: 0 stop | 3+ strong
 
-    // render as plain text (simple + safe)
-    let text = "";
-    for (const [k,v] of Object.entries(data.sections || {})) {
-      text += `\n=== ${k.toUpperCase()} ===\n${v}\n`;
-    }
-    if(data.watermark) text = "DEMO VERSION\n\n" + text;
+7️⃣ RISKS
+Adoption, regulation, commoditisation, timing, concentration
 
-    document.getElementById("out").textContent = text.trim();
-  };
+8️⃣ EXECUTION
+Copy–innovation paradox
+Cost: £0–300 | Time: 2–4 weeks | Solo: Yes
 
-  document.getElementById("copy").onclick = async () => {
-    await navigator.clipboard.writeText(document.getElementById("out").textContent);
-  };
+9️⃣ FOUNDER FIT
+This suits maintainers who tolerate boring delivery.
 
-  document.getElementById("download").onclick = () => {
-    const blob = new Blob([document.getElementById("out").textContent], {type:"text/plain"});
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = "picks-and-shovels-output.txt";
-    a.click();
-  };
+🔟 RESEARCH
+✓ Who pays?
+✓ Where is the bottleneck?
+✓ What breaks first?
+
+—
+Framework: Picks & Shovels™ by Adenike Omoregbee`;
+
+  const out=document.getElementById("output");
+  out.textContent=text;
+  const wm=document.createElement("div");
+  wm.className="watermark";
+  wm.textContent="DEMO";
+  out.appendChild(wm);
+}
+
+function copyOut(){
+  navigator.clipboard.writeText(document.getElementById("output").innerText);
+  alert("Copied");
+}
+
+function downloadOut(){
+  const text=document.getElementById("output").innerText;
+  const blob=new Blob([text],{type:"text/plain"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download="picks-and-shovels-output.txt";
+  a.click();
+}
 </script>
 
-<footer style="margin-top:30px;font-size:12px;">
-  <strong>Framework:</strong> Picks & Shovels™ by Adenike Omoregbee — Attribution required.
-</footer>
 </body>
 </html>
+
